@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "7UEDrOwWtxLyG7EZJcjH+KViJWW8ImUFGl66wEE3aDM=",
+  "Source": "MovieRental",
+  "BasePath": "_content/MovieRental",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

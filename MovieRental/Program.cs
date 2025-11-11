@@ -1,6 +1,7 @@
 using MovieRental.Data;
 using MovieRental.Movie;
 using MovieRental.Rental;
+using MovieRental.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEntityFrameworkSqlite().AddDbContext<MovieRentalDbContext>();
 
-builder.Services.AddSingleton<IRentalFeatures, RentalFeatures>();
+//since the RentalFeatures implements IRentalFeatures and the IRentalFeatures is registred 
+//as a Singleton, the scope cannot change 
+//Singletons are created once in a project lifetime
+//change the registration to be scoped
+//builder.Services.AddSingleton<IRentalFeatures, RentalFeatures>();
+builder.Services.AddScoped<IRentalFeatures, RentalFeatures>();
 
 var app = builder.Build();
 
@@ -24,6 +30,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 using (var client = new MovieRentalDbContext())
 {
